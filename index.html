@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced MBA Attendance Dashboard</title>
+    <title>Arpit Mishra MBA Attendance Dashboard</title>
     <style>
         :root {
             --primary-color: #007bff;
@@ -112,16 +112,32 @@
         .sim-value.safe { color: var(--safe-color); }
 
         .icon { vertical-align: middle; margin-right: 8px; width: 20px; height: 20px; }
-
-        /* --- NEW COPYRIGHT STYLE --- */
         .copyright {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9em;
-            color: var(--dark-grey);
-            font-style: italic;
+            text-align: center; margin-top: 30px; padding-top: 20px;
+            border-top: 1px solid var(--border-color); font-size: 0.9em;
+            color: var(--dark-grey); font-style: italic;
+        }
+
+        /* --- RESPONSIVE DESIGN STYLES --- */
+        @media (max-width: 850px) {
+            .container { padding: 20px 15px; }
+            .dashboard { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.8em; }
+            .input-section { flex-direction: column; align-items: stretch; }
+            .input-section button { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: 1.5em; }
+            header p { font-size: 0.9em; }
+            .card { padding: 15px; }
+            .card h3 { font-size: 1.1em; }
+            .gauge-container { width: 180px; height: 90px; }
+            .gauge-svg { width: 180px; height: 90px; }
+            .gauge-text { font-size: 2.2em; }
+            .subject-row { grid-template-columns: 80px 1fr 45px; font-size: 0.85em; }
+            .calendar-day { width: 28px; height: 28px; font-size: 0.8em; }
+            .day-name { font-size: 0.8em; }
         }
     </style>
 </head>
@@ -130,7 +146,7 @@
     <div class="container">
         <header>
             <h1>Advanced Attendance Dashboard</h1>
-            <p> Hello Arpit this a tool for tracking attendance, simulating leaves, and achieving your academic goals.</p>
+            <p>Arpit here is your tool for tracking attendance, simulating leaves, and achieving your academic goals.</p>
         </header>
         
         <div class="input-section">
@@ -201,7 +217,6 @@
             </div>
         </main>
         
-        <!-- --- NEW COPYRIGHT FOOTER --- -->
         <footer class="copyright">
             <p>&copy; 2025 | Made by Arpit Mishra</p>
         </footer>
@@ -251,8 +266,14 @@
         }
 
         function updateAllComponents() {
-            if (held === 0) return;
-            const percentage = (attended / held) * 100;
+            if (held === 0 && attended === 0) { // Allows starting from 0
+                updateGauge(0);
+                updateAnalysis(100, 0, 0); // Assume safe at start
+                updateSubjectBreakdown(0);
+                updateSimulation();
+                return;
+            }
+            const percentage = held === 0 ? 0 : (attended / held) * 100;
             updateGauge(percentage);
             updateAnalysis(percentage, held, attended);
             updateSubjectBreakdown(percentage);
@@ -271,12 +292,13 @@
         function updateAnalysis(percentage, currentHeld, currentAttended) {
             let content = '';
             const avgClassesPerDay = 34 / 5;
-            if (percentage >= REQUIRED_ATTENDANCE_PERCENT) {
-                const missableClasses = Math.floor(currentAttended / (REQUIRED_ATTENDANCE_PERCENT / 100) - currentHeld);
+            if (percentage >= REQUIRED_ATTENDANCE_PERCENT || (currentHeld === 0 && currentAttended === 0)) {
+                const missableClasses = (currentHeld === 0) ? "∞" : Math.floor(currentAttended / (REQUIRED_ATTENDANCE_PERCENT / 100) - currentHeld);
+                const practicalDays = (currentHeld === 0) ? "many" : (missableClasses / avgClassesPerDay).toFixed(1);
                 content = `
                     <div class="analysis-item" style="color:var(--safe-color); font-weight:bold;">STATUS: SAFE</div>
                     <div class="analysis-item"><strong>Attendance Buffer:</strong> You can miss <strong>${missableClasses}</strong> more classes before dropping to 75%.</div>
-                    <div class="analysis-item"><strong>In Practical Terms:</strong> This is roughly equivalent to <strong>${(missableClasses / avgClassesPerDay).toFixed(1)}</strong> full days of leave.</div>
+                    <div class="analysis-item"><strong>In Practical Terms:</strong> This is roughly equivalent to <strong>${practicalDays}</strong> full days of leave.</div>
                     <div class="insight"><strong>Tip:</strong> You have a healthy buffer. Use it wisely for emergencies or important events. Don't let your attendance drift down without reason.</div>
                 `;
             } else {
@@ -297,7 +319,7 @@
             let content = '';
             SUBJECTS.forEach(subject => {
                 const variation = (Math.random() - 0.5) * 10; // +/- 5% variation
-                let subjectPercent = Math.max(0, Math.min(100, overallPercentage + variation));
+                let subjectPercent = overallPercentage === 0 ? 0 : Math.max(0, Math.min(100, overallPercentage + variation));
                 const barClass = subjectPercent >= REQUIRED_ATTENDANCE_PERCENT ? 'safe' : 'warning';
                 content += `
                     <div class="subject-row">
@@ -351,8 +373,8 @@
         }
 
         function updateSimulation() {
-            if (held === 0) {
-                allDomElements.simulationResult.innerHTML = `<p><em>Update your current attendance first to run a simulation.</em></p>`;
+            if (allDomElements.dashboard.style.display !== 'grid') {
+                allDomElements.simulationResult.innerHTML = `<p><em>Generate dashboard to run simulation.</em></p>`;
                 return;
             }
             let missedClasses = 0, workingLeaveDays = 0;
@@ -371,7 +393,7 @@
 
             const newHeld = held + missedClasses;
             const newPercentage = (newHeld === 0) ? 0 : (attended / newHeld) * 100;
-            const oldPercentage = (attended / held) * 100;
+            const oldPercentage = (held === 0) ? 100 : (attended / held) * 100;
             const statusClass = newPercentage >= REQUIRED_ATTENDANCE_PERCENT ? 'safe' : 'warning';
             
             allDomElements.simulationResult.innerHTML = `
