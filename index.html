@@ -39,382 +39,1235 @@
             padding: 30px;
             box-sizing: border-box;
         }
-        header { text-align: center; margin-bottom: 25px; }
-        header h1 { color: var(--header-color); margin-bottom: 5px;}
-        header p { color: var(--dark-grey); margin-top: 0; }
-        
-        .input-section {
-            background-color: #f8f9fa; border: 1px solid var(--border-color); border-radius: 8px;
-            padding: 20px; margin-bottom: 25px; display: flex; flex-wrap: wrap;
-            gap: 20px; align-items: flex-end;
+        header { 
+            text-align: center; 
+            margin-bottom: 25px; 
         }
-        .input-group { flex: 1; min-width: 200px; }
-        label { display: block; font-weight: 600; margin-bottom: 8px; color: #555; }
+        header h1 { 
+            color: var(--header-color); 
+            margin-bottom: 5px;
+        }
+        header p { 
+            color: var(--dark-grey); 
+            margin-top: 0; 
+        }
+        .input-section {
+            background-color: #f8f9fa; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px;
+            padding: 20px; 
+            margin-bottom: 25px; 
+            display: flex; 
+            flex-wrap: wrap;
+            gap: 20px; 
+            align-items: flex-end;
+        }
+        .input-group { 
+            flex: 1; 
+            min-width: 200px; 
+        }
+        label { 
+            display: block; 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            color: #555; 
+        }
         input[type="number"] {
-            width: 100%; padding: 12px; border: 1px solid #ced4da;
-            border-radius: 6px; font-size: 16px; box-sizing: border-box;
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ced4da;
+            border-radius: 6px; 
+            font-size: 16px; 
+            box-sizing: border-box;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
-        input[type="number"]:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); outline: none; }
-        button {
-            padding: 12px 20px; border: none; border-radius: 6px; font-size: 16px;
-            font-weight: 600; cursor: pointer; transition: background-color 0.2s, transform 0.1s;
+        input[type="number"]:focus { 
+            border-color: var(--primary-color); 
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); 
+            outline: none; 
         }
-        button:active { transform: scale(0.98); }
-        .btn-primary { background-color: var(--primary-color); color: white; flex-shrink: 0; }
-        .btn-primary:hover { background-color: var(--primary-dark); }
-        
-        .dashboard { display: none; grid-template-columns: 1fr 1.5fr; gap: 25px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; }
-        .card h3 { margin-top: 0; border-bottom: 2px solid var(--light-grey); padding-bottom: 10px; margin-bottom: 15px; display:flex; align-items:center; gap: 10px; }
+        button {
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 6px; 
+            font-size: 16px;
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        button:active { 
+            transform: scale(0.98); 
+        }
+        .btn-primary { 
+            background-color: var(--primary-color); 
+            color: white; 
+            flex-shrink: 0; 
+        }
+        .btn-primary:hover { 
+            background-color: var(--primary-dark); 
+        }
+        .btn-secondary { /* Added for calendar buttons */
+            background-color: var(--dark-grey);
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    
+        .dashboard { 
+            display: none; /* Hidden by default, shown when dashboard is generated */
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px; 
+        }
+        .card { 
+            background-color: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            padding: 20px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow for cards */
+        }
+        .card h3 { 
+            margin-top: 0; 
+            border-bottom: 2px solid var(--light-grey); 
+            padding-bottom: 10px; 
+            margin-bottom: 15px; 
+            display:flex; 
+            align-items:center; 
+            gap: 10px; 
+            font-size: 1.2em; /* Slightly smaller heading */
+        }
 
         /* Gauge Infographic */
-        .gauge-container { position: relative; width: 200px; height: 100px; margin: 20px auto; overflow: hidden; }
-        .gauge-svg { width: 200px; height: 100px; }
-        .gauge-back { fill: none; stroke: #eee; stroke-width: 20; }
-        .gauge-front { fill: none; stroke: var(--primary-color); stroke-width: 20; stroke-linecap: round; transition: stroke-dashoffset 1s ease-in-out, stroke 1s; }
-        .gauge-text { position: absolute; top: 75%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5em; font-weight: 700; color: var(--header-color); }
-        .gauge-subtext { text-align: center; font-size: 1em; color: var(--dark-grey); }
+        .gauge-container { 
+            position: relative; 
+            width: 200px; 
+            height: 100px; 
+            margin: 20px auto; 
+            overflow: hidden; 
+        }
+        .gauge-svg { 
+            width: 200px; 
+            height: 100px; 
+        }
+        .gauge-back { 
+            fill: none; 
+            stroke: #eee; 
+            stroke-width: 20; 
+        }
+        .gauge-front { 
+            fill: none; 
+            stroke: var(--primary-color); 
+            stroke-width: 20; 
+            stroke-linecap: round; 
+            transition: stroke-dashoffset 1s ease-in-out, stroke 1s; 
+        }
+        .gauge-text { 
+            position: absolute; 
+            top: 65%; /* Adjusted position slightly */
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-size: 2.2em; /* Adjusted font size */
+            font-weight: 700; 
+            color: var(--header-color); 
+        }
+        .gauge-subtext { 
+            text-align: center; 
+            font-size: 0.9em; /* Slightly smaller */
+            color: var(--dark-grey); 
+            margin-top: -5px; /* Adjust spacing */
+        }
 
         /* Analysis Card */
-        .analysis-item { margin-bottom: 15px; }
-        .analysis-item strong { color: var(--header-color); }
-        .progress-bar { width: 100%; background-color: var(--border-color); border-radius: 5px; height: 10px; overflow: hidden; }
-        .progress-bar-inner { height: 100%; background-color: var(--warning-color); border-radius: 5px; transition: width 1s ease-in-out; }
-        .insight { background: var(--info-bg); border-left: 4px solid var(--info-color); padding: 15px; border-radius: 4px; margin-top: 20px; font-size: 0.9em; }
-        .hidden { display: none !important; }
-        
+        .analysis-item { 
+            margin-bottom: 15px; 
+        }
+        .analysis-item strong { 
+            color: var(--header-color); 
+        }
+        .progress-bar { 
+            width: 100%; 
+            background-color: var(--border-color); 
+            border-radius: 5px; 
+            height: 10px; 
+            overflow: hidden; 
+        }
+        .progress-bar-inner { 
+            height: 100%; 
+            background-color: var(--warning-color); 
+            border-radius: 5px; 
+            transition: width 1s ease-in-out; 
+        }
+        .insight { 
+            background: var(--info-bg); 
+            border-left: 4px solid var(--info-color); 
+            padding: 15px; 
+            border-radius: 4px; 
+            margin-top: 20px; 
+            font-size: 0.9em; 
+        }
+        .hidden { 
+            display: none !important; 
+        }
+    
         /* Subject Breakdown */
-        .subject-breakdown { display: grid; gap: 10px; }
-        .subject-row { display: grid; grid-template-columns: 100px 1fr 50px; align-items: center; gap: 10px; font-size: 0.9em; }
-        .subject-bar-container { background-color: var(--light-grey); border-radius: 4px; overflow:hidden; }
-        .subject-bar { height: 18px; background-color: var(--primary-color); border-radius: 4px; transition: width 1s ease-in-out; }
-        .subject-bar.safe { background-color: var(--safe-color); }
-        .subject-bar.warning { background-color: var(--warning-color); }
+        .subject-breakdown { 
+            display: grid; 
+            gap: 10px; 
+        }
+        .subject-row { 
+            display: grid; 
+            grid-template-columns: 100px 1fr 50px; 
+            align-items: center; 
+            gap: 10px; 
+            font-size: 0.9em; 
+        }
+        .subject-bar-container { 
+            background-color: var(--light-grey); 
+            border-radius: 4px; 
+            overflow:hidden; 
+        }
+        .subject-bar { 
+            height: 18px; 
+            background-color: var(--primary-color); 
+            border-radius: 4px; 
+            transition: width 1s ease-in-out; 
+        }
+        .subject-bar.safe { 
+            background-color: var(--safe-color); 
+        }
+        .subject-bar.warning { 
+            background-color: var(--warning-color); 
+        }
 
         /* Calendar and Simulation */
-        .calendar-container { text-align: center; }
-        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        #monthYear { font-size: 1.2em; font-weight: 600; color: var(--header-color); }
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-        .day-name { font-weight: 600; font-size: 0.9em; color: var(--dark-grey); }
-        .calendar-day { padding: 8px 5px; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin: auto; cursor: pointer; transition: all 0.2s; }
-        .calendar-day:not(.other-month):hover { background-color: #e9ecef; }
-        .other-month { color: #adb5bd; cursor: default; }
-        .weekend { color: #aaa; }
-        .holiday { background-color: var(--info-bg); color: var(--info-color); font-weight: bold; }
-        .selected-leave { background-color: var(--primary-color) !important; color: white !important; transform: scale(1.1); }
-        #simulationResult { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; }
-        .sim-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border-color); }
-        .sim-row:last-child { border-bottom: none; }
-        .sim-label { font-weight: 600; }
-        .sim-value.warning { color: var(--warning-color); }
-        .sim-value.safe { color: var(--safe-color); }
+        .calendar-container { 
+            text-align: center; 
+        }
+        .calendar-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 15px; 
+        }
+        #monthYear { 
+            font-size: 1.2em; 
+            font-weight: 600; 
+            color: var(--header-color); 
+        }
+        .calendar-grid { 
+            display: grid; 
+            grid-template-columns: repeat(7, 1fr); 
+            gap: 5px; 
+        }
+        .day-name { 
+            font-weight: 600; 
+            font-size: 0.9em; 
+            color: var(--dark-grey); 
+        }
+        .calendar-day { 
+            padding: 8px 5px; 
+            border-radius: 50%; 
+            width: 32px; 
+            height: 32px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: auto; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            border: 1px solid transparent; /* Add border for consistent hover */
+        }
+        .calendar-day:not(.other-month):hover { 
+            background-color: #e9ecef; 
+            border-color: #ced4da; /* Border on hover */
+        }
+        .calendar-day.selected-leave { /* Style for selected days */
+            background-color: var(--primary-color) !important; 
+            color: white !important; 
+            transform: scale(1.1); 
+            font-weight: bold;
+        }
+        .other-month { 
+            color: #adb5bd; 
+            cursor: default; 
+            background-color: transparent !important; /* Override hover if other-month */
+            border: 1px solid transparent; /* ensure it has a border base too */
+        }
+        .weekend { 
+            color: #6c757d; /* Slightly darker than holidays, to differentiate */
+        }
+        .holiday { 
+            background-color: var(--info-bg); 
+            color: var(--info-color); 
+            font-weight: bold;
+        }
+        #simulationResult { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background-color: #f8f9fa; 
+            border-radius: 8px; 
+            text-align: left; /* align simulation results */
+        }
+        .sim-row { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 5px 0; 
+            border-bottom: 1px solid var(--border-color); 
+        }
+        .sim-row:last-child { 
+            border-bottom: none; 
+        }
+        .sim-label { 
+            font-weight: 600; 
+            color: var(--header-color); /* Make labels stand out */
+        }
+        .sim-value { 
+            font-weight: 500; /* slightly bolder values */
+        }
+        .sim-value.warning { 
+            color: var(--warning-color); 
+        }
+        .sim-value.safe { 
+            color: var(--safe-color); 
+        }
 
-        .icon { vertical-align: middle; margin-right: 8px; width: 20px; height: 20px; }
+        /* Timetable Card */
+        .timetable-card table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 10px; 
+        }
+        .timetable-card th, .timetable-card td { 
+            padding: 8px; 
+            text-align: left; 
+            border: 1px solid var(--border-color); 
+        }
+        .timetable-card th { 
+            background-color: var(--light-grey); 
+            font-weight: 600; 
+            color: var(--header-color); 
+        }
+        .timetable-card td.day-header { 
+            font-weight: 700; 
+            color: var(--header-color); 
+            background-color: var(--card-bg); 
+        }
+        .timetable-card td.subject-time { 
+            font-size: 0.9em; 
+            color: var(--dark-grey); 
+        }
+
+        /* Summary Card */
+        .summary-card .analysis-item, .summary-card .insight { 
+            margin-bottom: 10px; 
+        }
+        .summary-card .insight { 
+            margin-top: 15px; 
+        }
+        .summary-card .progress-bar { 
+            margin-top: 5px; 
+        }
+
+        .icon { 
+            vertical-align: middle; 
+            margin-right: 8px; 
+            width: 20px; 
+            height: 20px; 
+            fill: currentColor; /* Ensure icons use text color */
+        }
         .copyright {
-            text-align: center; margin-top: 30px; padding-top: 20px;
-            border-top: 1px solid var(--border-color); font-size: 0.9em;
-            color: var(--dark-grey); font-style: italic;
+            text-align: center; 
+            margin-top: 30px; 
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color); 
+            font-size: 0.9em;
+            color: var(--dark-grey); 
+            font-style: italic;
         }
 
         /* --- RESPONSIVE DESIGN STYLES --- */
         @media (max-width: 850px) {
-            .container { padding: 20px 15px; }
-            .dashboard { grid-template-columns: 1fr; }
-            header h1 { font-size: 1.8em; }
-            .input-section { flex-direction: column; align-items: stretch; }
-            .input-section button { width: 100%; }
+            .container { 
+                padding: 20px 15px; 
+            }
+            .dashboard { 
+                grid-template-columns: 1fr; /* Stack cards vertically */
+            }
+            header h1 { 
+                font-size: 1.8em; 
+            }
+            .input-section { 
+                flex-direction: column; 
+                align-items: stretch; 
+            }
+            .input-section button { 
+                width: 100%; 
+            }
         }
 
         @media (max-width: 480px) {
-            header h1 { font-size: 1.5em; }
-            header p { font-size: 0.9em; }
-            .card { padding: 15px; }
-            .card h3 { font-size: 1.1em; }
-            .gauge-container { width: 180px; height: 90px; }
-            .gauge-svg { width: 180px; height: 90px; }
-            .gauge-text { font-size: 2.2em; }
-            .subject-row { grid-template-columns: 80px 1fr 45px; font-size: 0.85em; }
-            .calendar-day { width: 28px; height: 28px; font-size: 0.8em; }
-            .day-name { font-size: 0.8em; }
+            header h1 { 
+                font-size: 1.5em; 
+            }
+            header p { 
+                font-size: 0.9em; 
+            }
+            .card { 
+                padding: 15px; 
+            }
+            .card h3 { 
+                font-size: 1.1em; 
+            }
+            .gauge-container { 
+                width: 180px; 
+                height: 90px; 
+            }
+            .gauge-svg { 
+                width: 180px; 
+                height: 90px; 
+            }
+            .gauge-text { 
+                font-size: 2.2em; 
+            }
+            .subject-row { 
+                grid-template-columns: 80px 1fr 45px; 
+                font-size: 0.85em; 
+            }
+            .calendar-day { 
+                width: 28px; 
+                height: 28px; 
+                font-size: 0.8em; 
+            }
+            .day-name { 
+                font-size: 0.8em; 
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Advanced Attendance Dashboard</h1>
-            <p>Arpit here is your tool for tracking attendance, simulating leaves, and achieving your academic goals.</p>
-        </header>
-        
-        <div class="input-section">
-            <div class="input-group">
-                <label for="classesHeld">Total Classes Held So Far</label>
-                <input type="number" id="classesHeld" placeholder="e.g., 150">
-            </div>
-            <div class="input-group">
-                <label for="classesAttended">Total Classes You Attended</label>
-                <input type="number" id="classesAttended" placeholder="e.g., 120">
-            </div>
-            <button id="calculateBtn" class="btn-primary">Generate Dashboard</button>
+<div class="container">
+    <header>
+        <h1>Advanced Attendance Dashboard</h1>
+        <p>Arpit Mishra here is your tool for tracking attendance, simulating leaves, and achieving your academic goals.</p>
+    </header>
+    
+    <div class="input-section">
+        <div class="input-group">
+            <label for="classesHeld">Total Classes Held So Far</label>
+            <input type="number" id="classesHeld" placeholder="e.g., 150">
         </div>
-
-        <main id="dashboard" class="dashboard">
-            <div class="left-column">
-                <div class="card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,12.5A1.5,1.5 0 0,1 10.5,11A1.5,1.5 0 0,1 12,9.5A1.5,1.5 0 0,1 13.5,11A1.5,1.5 0 0,1 12,12.5M17,11.5C17,13.43 14.77,15 12,15C9.23,15 7,13.43 7,11.5C7,9.57 9.23,8 12,8C14.77,8 17,9.57 17,11.5Z" /></svg>
-                        Overall Attendance
-                    </h3>
-                    <div class="gauge-container">
-                        <svg class="gauge-svg" viewBox="0 0 100 50">
-                            <path class="gauge-back" d="M10 50 A 40 40 0 0 1 90 50" stroke-width="20"></path>
-                            <path id="gaugeFront" class="gauge-front" d="M10 50 A 40 40 0 0 1 90 50" stroke-width="20"></path>
-                        </svg>
-                        <div id="gaugeText" class="gauge-text">-</div>
-                    </div>
-                    <p id="gaugeSubtext" class="gauge-subtext">-</p>
-                </div>
-                 <div class="card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
-                        Strategic Analysis
-                    </h3>
-                    <div id="analysisContent"></div>
-                </div>
-            </div>
-
-            <div class="right-column">
-                <div class="card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M3,13H11V11H3M3,6V8H21V6M3,18H11V16H3M13,16H21V18H13M13,11H21V13H13M13,6V8H21V6Z" /></svg>
-                        Simulated Subject Breakdown
-                    </h3>
-                    <div id="subjectBreakdown"></div>
-                    <small style="display:block; text-align:center; margin-top:10px; color:var(--dark-grey);"><i>*This is an estimation based on your overall percentage.</i></small>
-                </div>
-                <div class="card">
-                     <h3>
-                        <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M16.53,11.06L15.47,10L10.5,14.97L8.47,12.94L7.41,14L10.5,17.09L16.53,11.06Z" /></svg>
-                        Leave & Holiday Planner
-                    </h3>
-                    <div class="calendar-container">
-                        <div class="calendar-header">
-                            <button id="prevMonthBtn" class="btn-secondary" style="padding: 8px 12px;">◄</button>
-                            <h4 id="monthYear"></h4>
-                            <button id="nextMonthBtn" class="btn-secondary" style="padding: 8px 12px;">►</button>
-                        </div>
-                        <div class="calendar-grid">
-                            <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div>
-                            <div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
-                        </div>
-                        <div id="calendarGrid" class="calendar-grid"></div>
-                    </div>
-                    <div id="simulationResult"></div>
-                </div>
-            </div>
-        </main>
-        
-        <footer class="copyright">
-            <p>&copy; 2025 | Made by Arpit Mishra</p>
-        </footer>
+        <div class="input-group">
+            <label for="classesAttended">Total Classes You Attended</label>
+            <input type="number" id="classesAttended" placeholder="e.g., 120">
+        </div>
+        <button id="calculateBtn" class="btn-primary">Generate Dashboard</button>
     </div>
 
-    <script>
-        // --- CONFIGURATION --- //
-        const REQUIRED_ATTENDANCE_PERCENT = 75;
-        const CLASSES_PER_DAY = { 0: 0, 1: 6, 2: 7, 3: 7, 4: 7, 5: 7, 6: 0 }; // Sun-Sat
-        const SUBJECTS = ["Strategic Mgt", "Universal Values", "Int'l Finance", "Counseling Skills", "Marketing Svcs", "Financial Mkts", "Security Analysis", "Business Intel", "SEO"];
-        const HOLIDAYS = { '2025-08-09': 'Raksha Bandhan', '2025-08-15': 'Independence Day', '2025-08-16': 'Janmashtami', '2025-10-02': 'Gandhi Jayanti', '2025-10-07': 'Valmiki Jayanti', '2025-10-20': 'Deepawali', '2025-10-21': 'Deepawali', '2025-10-22': 'Deepawali', '2025-10-23': 'Deepawali', '2025-11-05': 'Guru Nanak B\'day', '2025-12-25': 'Christmas' };
+    <main id="dashboard" class="dashboard">
+        <!-- Left Column -->
+        <div class="card">
+            <h3>
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,12.5A1.5,1.5 0 0,1 10.5,11A1.5,1.5 0 0,1 12,9.5A1.5,1.5 0 0,1 13.5,11A1.5,1.5 0 0,1 12,12.5M17,11.5C17,13.43 14.77,15 12,15C9.23,15 7,13.43 7,11.5C7,9.57 9.23,8 12,8C14.77,8 17,9.57 17,11.5Z" /></svg>
+                Overall Attendance
+            </h3>
+            <div class="gauge-container">
+                <svg class="gauge-svg" viewBox="0 0 100 50">
+                    <path class="gauge-back" d="M10 50 A 40 40 0 0 1 90 50" stroke-width="20"></path>
+                    <path id="gaugeFront" class="gauge-front" d="M10 50 A 40 40 0 0 1 90 50" stroke-width="20"></path>
+                </svg>
+                <div id="gaugeText" class="gauge-text">-</div>
+            </div>
+            <p id="gaugeSubtext" class="gauge-subtext">-</p>
+        </div>
+
+        <div class="card">
+            <h3>
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
+                Strategic Analysis
+            </h3>
+            <div id="analysisContent"></div>
+        </div>
         
-        // --- STATE --- //
-        let currentDate = new Date(2025, 7, 1);
-        let selectedLeaveDates = new Set();
-        let held = 0, attended = 0;
+        <!-- New Card: Summary of Attendance & Leave -->
+        <div class="card summary-card">
+            <h3>
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,19.2C9.24,19.2 6.71,17.37 6.23,14.72L8.78,14.29C9.04,16.16 10.78,17.35 12.5,17.35C14.22,17.35 15.96,16.16 16.22,14.29L18.77,14.72C18.29,17.37 15.76,19.2 12,19.2M12,10.9C10.85,10.9 9.78,10.34 9.01,9.47L7.09,11.39L6.5,10.8L8.52,8.78C7.65,8.01 7.09,6.94 7.09,5.8C7.09,3.75 8.75,2 10.8,2C12.85,2 14.5,3.75 14.5,5.8C14.5,7.85 12.85,9.5 10.8,9.5C11.3,9.5 11.8,9.4 12.27,9.27L14.09,11.09C13.22,11.77 12.7,11.41 12,10.9M10.8,4C9.9,4 9.2,4.7 9.2,5.8C9.2,6.9 9.9,7.6 10.8,7.6C11.7,7.6 12.4,6.9 12.4,5.8C12.4,4.7 11.7,4 10.8,4Z"/></svg>
+                Attendance Summary
+            </h3>
+            <div id="summaryContent"></div>
+        </div>
 
-        // --- DOM ELEMENTS --- //
-        const allDomElements = {
-            calculateBtn: document.getElementById('calculateBtn'), heldInput: document.getElementById('classesHeld'), attendedInput: document.getElementById('classesAttended'),
-            dashboard: document.getElementById('dashboard'), gaugeFront: document.getElementById('gaugeFront'), gaugeText: document.getElementById('gaugeText'),
-            gaugeSubtext: document.getElementById('gaugeSubtext'), analysisContent: document.getElementById('analysisContent'), subjectBreakdown: document.getElementById('subjectBreakdown'),
-            prevMonthBtn: document.getElementById('prevMonthBtn'), nextMonthBtn: document.getElementById('nextMonthBtn'), monthYearEl: document.getElementById('monthYear'),
-            calendarGrid: document.getElementById('calendarGrid'), simulationResult: document.getElementById('simulationResult')
-        };
-        const gaugeCircumference = 2 * Math.PI * 40 * 0.5; // Half circle
+        <!-- Right Column -->
+        <div class="card">
+            <h3>
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M3,13H11V11H3M3,6V8H21V6M3,18H11V16H3M13,16H21V18H13M13,11H21V13H13M13,6V8H21V6Z" /></svg>
+                Simulated Subject Breakdown
+            </h3>
+            <div id="subjectBreakdown"></div>
+            <small style="display:block; text-align:center; margin-top:10px; color:var(--dark-grey);"><i>*This is an estimation based on your overall percentage.</i></small>
+        </div>
 
-        // --- EVENT LISTENERS --- //
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCalendar();
-            allDomElements.calculateBtn.addEventListener('click', generateDashboard);
-            allDomElements.prevMonthBtn.addEventListener('click', () => changeMonth(-1));
-            allDomElements.nextMonthBtn.addEventListener('click', () => changeMonth(1));
-        });
+        <div class="card">
+             <h3>
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M16.53,11.06L15.47,10L10.5,14.97L8.47,12.94L7.41,14L10.5,17.09L16.53,11.06Z" /></svg>
+                Leave & Holiday Planner
+            </h3>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button id="prevMonthBtn" class="btn-secondary" style="padding: 8px 12px;">◄</button>
+                    <h4 id="monthYear"></h4>
+                    <button id="nextMonthBtn" class="btn-secondary" style="padding: 8px 12px;">►</button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div>
+                    <div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
+                </div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+            <div id="simulationResult"></div>
+        </div>
 
-        // --- CORE FUNCTIONS --- //
-        function generateDashboard() {
-            held = parseInt(allDomElements.heldInput.value);
-            attended = parseInt(allDomElements.attendedInput.value);
+        <!-- New Card: Timetable -->
+        <div class="card timetable-card">
+            <h3>
+                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M7,1H17A2,2 0 0,1 19,3V21A2,2 0 0,1 17,23H7A2,2 0 0,1 5,21V3A2,2 0 0,1 7,1M7,2A1,1 0 0,0 6,3V17H18V3A1,1 0 0,0 17,2H7Z" /></svg>
+                Your Timetable
+            </h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody id="timetableBody">
+                    <!-- Timetable rows will be populated by JS -->
+                </tbody>
+            </table>
+        </div>
 
-            if (isNaN(held) || isNaN(attended) || held < 0 || attended < 0 || attended > held) {
-                alert("Please enter valid numbers. Attended classes cannot be more than held.");
-                return;
-            }
-            allDomElements.dashboard.style.display = 'grid';
-            updateAllComponents();
+    </main>
+    
+    <footer class="copyright">
+        <p>&copy; 2025 | Made by Arpit Mishra</p>
+    </footer>
+</div>
+
+<script>
+    // --- CONFIGURATION --- //
+    const REQUIRED_ATTENDANCE_PERCENT = 75;
+    // Classes held per day of the week (0: Sunday, 6: Saturday)
+    const CLASSES_PER_DAY = { 0: 0, 1: 4, 2: 4, 3: 5, 4: 5, 5: 4, 6: 0 }; 
+
+    const SUBJECTS_TIMETABLE_INFO = [
+        { subject: "Strategic Management", days: ["Mon", "Tue", "Wed", "Thu"], times: ["9:30 AM - 10:30 AM", "9:30 AM - 10:30 AM", "9:30 AM - 10:30 AM", "9:30 AM - 10:30 AM"] },
+        { subject: "Universal Human Value", days: ["Mon", "Fri"], times: ["10:30 AM - 11:30 AM", "9:30 AM - 10:30 AM"] },
+        { subject: "IFM", days: ["Mon", "Tue", "Wed", "Thu"], times: ["11:30 AM - 12:30 PM", "11:30 AM - 12:30 PM", "11:30 AM - 12:30 PM", "11:30 AM - 12:30 PM"] },
+        { subject: "Finance", days: ["Mon", "Wed", "Thu", "Fri"], times: ["3:30 PM - 4:30 PM", "3:30 PM - 4:30 PM", "2:30 PM - 3:30 PM", "1:30 PM - 2:30 PM"] },
+        { subject: "Security Analysis", days: ["Tue", "Wed", "Thu", "Fri"], times: ["10:30 AM - 11:30 AM", "10:30 AM - 11:30 AM", "10:30 AM - 11:30 AM", "10:30 AM - 11:30 AM"] },
+        { subject: "Digital Marketing", days: ["Tue", "Wed", "Thu", "Fri"], times: ["3:30 PM - 4:30 PM", "2:30 PM - 3:30 PM", "12:30 PM - 1:30 PM", "12:30 PM - 1:30 PM"] }
+    ];
+
+    // Define academic period (August 1, 2025 to December 31, 2025)
+    const ACADEMIC_START_DATE_OBJ = new Date(2025, 7, 1); // Month is 0-indexed (7 = August)
+    const ACADEMIC_END_DATE_OBJ = new Date(2025, 11, 31); // 11 = December
+
+    // Define holidays with dates in 'YYYY-MM-DD' format for easy lookup
+    const HOLIDAYS = { 
+        '2025-08-09': 'Raksha Bandhan', 
+        '2025-08-15': 'Independence Day', 
+        '2025-08-16': 'Janmashtami', 
+        '2025-10-02': 'Gandhi Jayanti', 
+        '2025-10-07': 'Valmiki Jayanti', 
+        '2025-10-20': 'Deepawali', 
+        '2025-10-21': 'Deepawali', 
+        '2025-10-22': 'Deepawali', 
+        '2025-10-23': 'Deepawali', 
+        '2025-11-05': 'Guru Nanak B\'day', 
+        '2025-12-25': 'Christmas' 
+    };
+    
+    // --- DOM ELEMENT MAPPING --- //
+    // This object will hold references to all frequently used DOM elements.
+    const allDomElements = {
+        heldInput: document.getElementById('classesHeld'),
+        attendedInput: document.getElementById('classesAttended'),
+        calculateBtn: document.getElementById('calculateBtn'),
+        dashboard: document.getElementById('dashboard'),
+        gaugeFront: document.getElementById('gaugeFront'),
+        gaugeText: document.getElementById('gaugeText'),
+        gaugeSubtext: document.getElementById('gaugeSubtext'),
+        analysisContent: document.getElementById('analysisContent'),
+        summaryContent: document.getElementById('summaryContent'),
+        subjectBreakdown: document.getElementById('subjectBreakdown'), // Not actively used in JS, but good to map if expanded.
+        prevMonthBtn: document.getElementById('prevMonthBtn'),
+        nextMonthBtn: document.getElementById('nextMonthBtn'),
+        monthYearEl: document.getElementById('monthYear'),
+        calendarGrid: document.getElementById('calendarGrid'),
+        simulationResult: document.getElementById('simulationResult'),
+        timetableBody: document.getElementById('timetableBody'),
+    };
+
+    // --- CONSTANTS --- //
+    // For the SVG gauge, radius is 40. The semicircle path length is PI * r.
+    // The stroke-dasharray and offset work on the path length.
+    // Total length of the semicircle arc is approximately 125.66.
+    const gaugeCircumference = Math.PI * 40; 
+
+    // --- STATE --- //
+    let calendarNavDate; // Stores the current month/year being displayed in the calendar.
+    let inputDataDate;   // Stores the date up to which 'held' and 'attended' are valid ("as of" date).
+    let selectedLeaveDates = new Set(); // Stores selected leave dates as 'YYYY-MM-DD' strings.
+    let held = 0, attended = 0; // User input for classes held and attended.
+    let totalClassesInAcademicPeriod = 0; // Pre-calculated total classes in the academic term.
+    let totalWorkingDaysInAcademicPeriod = 0; // Pre-calculated total working days (Mon-Fri, excluding holidays) in the academic term.
+
+    // --- HELPER FUNCTIONS --- //
+    
+    /**
+     * Formats a Date object into a 'YYYY-MM-DD' string.
+     * @param {Date} date The date to format.
+     * @returns {string} The formatted date string.
+     */
+    function formatDate(date) {
+        // Ensure date is normalized to the start of the day for consistent comparisons.
+        const d = new Date(date);
+        d.setHours(0, 0, 0, 0);
+        return d.toISOString().split('T')[0];
+    }
+
+    /**
+     * Counts the total number of classes held within a date range, 
+     * based on the CLASSES_PER_DAY configuration.
+     * @param {Date} startDate The start of the period.
+     * @param {Date} endDate The end of the period.
+     * @returns {number} The total number of classes.
+     */
+    function countClassesBetweenDates(startDate, endDate) {
+        let totalClasses = 0;
+        let current = new Date(startDate);
+        current.setHours(0,0,0,0); // Normalize time to start of day
+
+        while (current <= endDate) {
+            const dayOfWeek = current.getDay(); // 0 for Sunday, 6 for Saturday
+            // Add classes for the day of the week, default to 0 if not specified (e.g., for weekends)
+            totalClasses += CLASSES_PER_DAY[dayOfWeek] || 0; 
+            current.setDate(current.getDate() + 1); // Move to the next day
         }
+        return totalClasses;
+    }
 
-        function updateAllComponents() {
-            if (held === 0 && attended === 0) { // Allows starting from 0
-                updateGauge(0);
-                updateAnalysis(100, 0, 0); // Assume safe at start
-                updateSubjectBreakdown(0);
-                updateSimulation();
-                return;
-            }
-            const percentage = held === 0 ? 0 : (attended / held) * 100;
-            updateGauge(percentage);
-            updateAnalysis(percentage, held, attended);
-            updateSubjectBreakdown(percentage);
-            updateSimulation();
+    /**
+     * Counts the number of working days (Monday-Friday) within a date range,
+     * excluding any dates specified in the HOLIDAYS object.
+     * @param {Date} startDate The start of the period.
+     * @param {Date} endDate The end of the period.
+     * @returns {number} The total number of working days.
+     */
+    function countWorkingDaysBetweenDates(startDate, endDate) {
+         let workingDays = 0;
+         let current = new Date(startDate);
+         current.setHours(0,0,0,0); // Normalize time
+
+         while (current <= endDate) {
+             const dayOfWeek = current.getDay();
+             const formattedCurrentDate = formatDate(current);
+             // Count if it's Mon-Fri and NOT a holiday
+             if (dayOfWeek !== 0 && dayOfWeek !== 6 && !HOLIDAYS[formattedCurrentDate]) {
+                 workingDays++;
+             }
+             current.setDate(current.getDate() + 1); // Move to the next day
+         }
+         return workingDays;
+    }
+
+    /**
+     * Calculates the average number of classes per working day.
+     * Handles division by zero if there are no working days.
+     * @returns {number} The average classes per working day.
+     */
+    function getAvgClassesPerWorkingDay() {
+        if (totalWorkingDaysInAcademicPeriod > 0) {
+            // Returns classes/day, could be float.
+            return totalClassesInAcademicPeriod / totalWorkingDaysInAcademicPeriod;
         }
+        return 0; // Return 0 if no working days to prevent NaN/Infinity
+    }
 
-        function updateGauge(percentage) {
-            const offset = gaugeCircumference * (1 - (percentage / 100));
-            allDomElements.gaugeFront.style.strokeDasharray = gaugeCircumference;
-            allDomElements.gaugeFront.style.strokeDashoffset = offset;
-            allDomElements.gaugeFront.style.stroke = percentage >= REQUIRED_ATTENDANCE_PERCENT ? 'var(--safe-color)' : 'var(--warning-color)';
-            allDomElements.gaugeText.textContent = `${percentage.toFixed(1)}%`;
-            allDomElements.gaugeSubtext.textContent = `${attended} / ${held} Classes`;
+    // --- INITIALIZATION --- //
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOMContentLoaded: Script started.");
+        const today = new Date();
+        today.setHours(0,0,0,0); // Normalize today's date
+
+        // Set the initial date for calendar navigation.
+        // If today is before the academic start, default to the academic start date.
+        // Otherwise, use a copy of today's date.
+        if (today < ACADEMIC_START_DATE_OBJ) {
+            calendarNavDate = new Date(ACADEMIC_START_DATE_OBJ); 
+        } else {
+            calendarNavDate = new Date(today); // Use a copy of today's date
+        }
+        console.log(`DOMContentLoaded: Initial calendarNavDate set to ${formatDate(calendarNavDate)}`);
+        
+        // Pre-calculate total classes and working days in the academic period
+        // These are static values for the entire semester and don't need recalculation.
+        totalClassesInAcademicPeriod = countClassesBetweenDates(ACADEMIC_START_DATE_OBJ, ACADEMIC_END_DATE_OBJ);
+        totalWorkingDaysInAcademicPeriod = countWorkingDaysBetweenDates(ACADEMIC_START_DATE_OBJ, ACADEMIC_END_DATE_OBJ);
+        console.log(`DOMContentLoaded: Total classes in period: ${totalClassesInAcademicPeriod}, Total working days: ${totalWorkingDaysInAcademicPeriod}`);
+
+        renderCalendar(); // Render calendar for the initial month (or the academic start month).
+        populateTimetable(); // Populate the timetable card with the static schedule.
+        
+        // Attach event listeners to interactive elements.
+        allDomElements.calculateBtn.addEventListener('click', generateDashboard);
+        allDomElements.prevMonthBtn.addEventListener('click', () => changeMonth(-1)); // Previous month
+        allDomElements.nextMonthBtn.addEventListener('click', () => changeMonth(1));  // Next month
+        console.log("DOMContentLoaded: Event listeners attached, calendar and timetable rendered.");
+    });
+
+    // --- CORE FUNCTIONS --- //
+
+    /**
+     * Triggered when the "Generate Dashboard" button is clicked.
+     * Reads input values, performs validation, sets the reference date, 
+     * makes the dashboard visible, and updates all components.
+     */
+    function generateDashboard() {
+        console.log("generateDashboard: Function called.");
+        const heldInputVal = allDomElements.heldInput.value;
+        const attendedInputVal = allDomElements.attendedInput.value;
+        console.log(`generateDashboard: Input values - Held: "${heldInputVal}", Attended: "${attendedInputVal}"`);
+
+        // Parse and validate input values.
+        held = parseInt(heldInputVal);
+        attended = parseInt(attendedInputVal);
+        console.log(`generateDashboard: Parsed values - held: ${held}, attended: ${attended}`);
+
+        // Input validation: ensure numbers are valid, attended is not more than held.
+        if (isNaN(held) || isNaN(attended) || held < 0 || attended < 0 || attended > held) {
+            alert("Please enter valid numbers. Ensure 'Classes Attended' is not more than 'Total Classes Held'.");
+            console.error("generateDashboard: Input validation failed.");
+            return; // Exit function if validation fails
         }
         
-        function updateAnalysis(percentage, currentHeld, currentAttended) {
-            let content = '';
-            const avgClassesPerDay = 34 / 5;
-            if (percentage >= REQUIRED_ATTENDANCE_PERCENT || (currentHeld === 0 && currentAttended === 0)) {
-                const missableClasses = (currentHeld === 0) ? "∞" : Math.floor(currentAttended / (REQUIRED_ATTENDANCE_PERCENT / 100) - currentHeld);
-                const practicalDays = (currentHeld === 0) ? "many" : (missableClasses / avgClassesPerDay).toFixed(1);
-                content = `
-                    <div class="analysis-item" style="color:var(--safe-color); font-weight:bold;">STATUS: SAFE</div>
-                    <div class="analysis-item"><strong>Attendance Buffer:</strong> You can miss <strong>${missableClasses}</strong> more classes before dropping to 75%.</div>
-                    <div class="analysis-item"><strong>In Practical Terms:</strong> This is roughly equivalent to <strong>${practicalDays}</strong> full days of leave.</div>
-                    <div class="insight"><strong>Tip:</strong> You have a healthy buffer. Use it wisely for emergencies or important events. Don't let your attendance drift down without reason.</div>
-                `;
-            } else {
-                const neededClasses = Math.ceil(((REQUIRED_ATTENDANCE_PERCENT / 100) * currentHeld - currentAttended) / (1 - (REQUIRED_ATTENDANCE_PERCENT / 100)));
-                const progressToGoal = (currentAttended * (1 - (REQUIRED_ATTENDANCE_PERCENT/100))) / ( (REQUIRED_ATTENDANCE_PERCENT/100) * currentHeld - currentAttended ) * 100;
-                content = `
-                    <div class="analysis-item" style="color:var(--warning-color); font-weight:bold;">STATUS: WARNING</div>
-                    <div class="analysis-item"><strong>Attendance Deficit:</strong> You must attend the next <strong>${neededClasses}</strong> classes without absence to reach 75%.</div>
-                    <div class="analysis-item"><strong>Recovery Time:</strong> This will take approximately <strong>${(neededClasses / avgClassesPerDay).toFixed(1)}</strong> full days of classes.</div>
-                    <div class="analysis-item"><strong>Progress to 75%:</strong> <div class="progress-bar"><div class="progress-bar-inner" style="width:${Math.min(100, progressToGoal)}%;"></div></div></div>
-                    <div class="insight"><strong>Tip:</strong> Prioritize attending every class. Each full day of attendance (~7 classes) will significantly help close this gap.</div>
-                `;
-            }
-            allDomElements.analysisContent.innerHTML = content;
-        }
+        // Set the reference date for the input data. This is crucial for the simulation
+        // to only consider leaves taken *after* this date.
+        const today = new Date();
+        today.setHours(0,0,0,0); // Normalize today's date to midnight
 
-        function updateSubjectBreakdown(overallPercentage) {
-            let content = '';
-            SUBJECTS.forEach(subject => {
-                const variation = (Math.random() - 0.5) * 10; // +/- 5% variation
-                let subjectPercent = overallPercentage === 0 ? 0 : Math.max(0, Math.min(100, overallPercentage + variation));
-                const barClass = subjectPercent >= REQUIRED_ATTENDANCE_PERCENT ? 'safe' : 'warning';
-                content += `
-                    <div class="subject-row">
-                        <span>${subject}</span>
-                        <div class="subject-bar-container"><div class="subject-bar ${barClass}" style="width:${subjectPercent}%;"></div></div>
-                        <strong class="${barClass}">${subjectPercent.toFixed(0)}%</strong>
-                    </div>
-                `;
-            });
-            allDomElements.subjectBreakdown.innerHTML = content;
+        // If the current date is before the academic start, use the academic start date as the reference.
+        // Otherwise, use today's date. This ensures simulations always have a valid starting point.
+        if (today < ACADEMIC_START_DATE_OBJ) {
+            inputDataDate = new Date(ACADEMIC_START_DATE_OBJ);
+        } else {
+            inputDataDate = new Date(today); // Use a copy of today's date
+        }
+        console.log(`generateDashboard: Input data reference date set to ${formatDate(inputDataDate)}`);
+
+        // Make the main dashboard area visible by changing its display style.
+        allDomElements.dashboard.style.display = 'grid';
+        console.log("generateDashboard: Dashboard display set to 'grid'.");
+        
+        // Call the function to update all dashboard components with the latest data.
+        updateAllComponents();
+        console.log("generateDashboard: updateAllComponents called.");
+    }
+
+    /**
+     * Updates all visual components of the dashboard based on current state 
+     * (held, attended, selectedLeaveDates).
+     */
+    function updateAllComponents() {
+        console.log("updateAllComponents: Starting update sequence.");
+        
+        // Handle the initial state where no data has been entered (held=0, attended=0).
+        if (held === 0 && attended === 0) { 
+            console.log("updateAllComponents: No classes held/attended entered. Applying initial/default view.");
+            // Update all components to show default or placeholder values (e.g., 0% attendance).
+            updateGauge(0); 
+            updateAnalysis(0, 0, 0);
+            updateSubjectBreakdown(0); // Assuming this might show placeholders if expanded
+            updateSummary(0, 0, 0);
+            updateSimulation(); // This will likely display the initial prompt for planning leave.
+            console.log("updateAllComponents: Initial/default view applied.");
+            return; // Exit if no data to process
         }
         
-        function renderCalendar() {
-            allDomElements.calendarGrid.innerHTML = '';
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            allDomElements.monthYearEl.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
-            const firstDayOfMonth = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            for (let i = 0; i < firstDayOfMonth; i++) allDomElements.calendarGrid.insertAdjacentHTML('beforeend', `<div class="calendar-day other-month"></div>`);
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const dayOfWeek = new Date(year, month, day).getDay();
-                const dayEl = document.createElement('div');
-                dayEl.className = 'calendar-day';
-                dayEl.textContent = day;
-                dayEl.dataset.date = dateStr;
-                if (dayOfWeek === 0 || dayOfWeek === 6) dayEl.classList.add('weekend');
-                if (HOLIDAYS[dateStr]) dayEl.classList.add('holiday');
-                if (selectedLeaveDates.has(dateStr)) dayEl.classList.add('selected-leave');
-                dayEl.addEventListener('click', handleDateClick);
-                allDomElements.calendarGrid.appendChild(dayEl);
-            }
+        // Calculate the overall attendance percentage.
+        let percentage = 0;
+        if (held > 0) {
+            // Calculate percentage, ensuring it's within bounds [0, 100].
+            percentage = (attended / held) * 100;
+        } else if (attended === 0) {
+            // If held is 0 and attended is also 0, percentage is considered 0.
+            percentage = 0;
         }
-
-        function handleDateClick(event) {
-            const dateStr = event.target.dataset.date;
-            if (!dateStr || allDomElements.dashboard.style.display !== 'grid') {
-                 if (allDomElements.dashboard.style.display !== 'grid') alert('Please generate the dashboard first!');
-                 return;
-            }
-            if (selectedLeaveDates.has(dateStr)) selectedLeaveDates.delete(dateStr);
-            else selectedLeaveDates.add(dateStr);
-            event.target.classList.toggle('selected-leave');
-            updateSimulation();
+        // Ensure percentage is a finite number (handle potential NaN/Infinity from division).
+        if (!isFinite(percentage)) {
+            percentage = 0; // Default to 0 if calculation results in NaN or Infinity.
+            console.warn("updateAllComponents: Calculated percentage was not finite, defaulting to 0%.");
         }
+        console.log(`updateAllComponents: Calculated overall attendance percentage = ${percentage.toFixed(1)}%`);
+        
+        // Update all visual components with the calculated and current data.
+        updateGauge(percentage);
+        updateAnalysis(percentage, held, attended);
+        updateSubjectBreakdown(percentage); // Pass percentage for potential conditional styling/logic.
+        updateSummary(percentage, held, attended);
+        updateSimulation(); // Update the simulation section to reflect current inputs and selected leaves.
+        console.log("updateAllComponents: All component updates executed.");
+    }
 
-        function changeMonth(offset) {
-            currentDate.setMonth(currentDate.getMonth() + offset);
-            renderCalendar();
-        }
+    /**
+     * Updates the SVG gauge visualization with the given attendance percentage.
+     * @param {number} percentage The overall attendance percentage (0-100).
+     */
+    function updateGauge(percentage) {
+        console.log(`updateGauge: Called with percentage: ${percentage.toFixed(1)}%`);
+        // Clamp percentage to the range [0, 100] for display purposes.
+        const effectivePercentage = Math.min(100, Math.max(0, percentage));
+        
+        // Calculate the stroke-dashoffset to show the correct fill level of the gauge.
+        // The offset is subtracted from the dasharray (total length).
+        const offset = gaugeCircumference * (1 - (effectivePercentage / 100));
+        
+        // Set the dasharray and offset for the front path of the gauge.
+        allDomElements.gaugeFront.style.strokeDasharray = gaugeCircumference;
+        allDomElements.gaugeFront.style.strokeDashoffset = offset;
+        
+        // Set the color of the gauge: green for safe (>75%), red for warning (<75%).
+        const requiredColor = percentage >= REQUIRED_ATTENDANCE_PERCENT ? 'var(--safe-color)' : 'var(--warning-color)';
+        allDomElements.gaugeFront.style.stroke = requiredColor;
+        
+        // Update the text content of the gauge with the percentage and current attendance count.
+        allDomElements.gaugeText.textContent = `${effectivePercentage.toFixed(1)}%`;
+        allDomElements.gaugeSubtext.textContent = `${attended} / ${held} Classes`;
+        console.log(`updateGauge: Gauge updated with ${effectivePercentage.toFixed(1)}%`);
+    }
+    
+    /**
+     * Updates the "Strategic Analysis" card content.
+     * Analyzes attendance status (safe/warning) and provides actionable insights.
+     * @param {number} percentage Current overall attendance percentage.
+     * @param {number} currentHeld Total classes held according to input.
+     * @param {number} currentAttended Total classes attended according to input.
+     */
+    function updateAnalysis(percentage, currentHeld, currentAttended) {
+        console.log(`updateAnalysis: Called with percentage: ${percentage.toFixed(1)}%, held: ${currentHeld}, attended: ${currentAttended}`);
+        let content = '';
+        const avgClassesPerWorkingDay = getAvgClassesPerWorkingDay(); // Get average classes per day.
 
-        function updateSimulation() {
-            if (allDomElements.dashboard.style.display !== 'grid') {
-                allDomElements.simulationResult.innerHTML = `<p><em>Generate dashboard to run simulation.</em></p>`;
-                return;
-            }
-            let missedClasses = 0, workingLeaveDays = 0;
-            selectedLeaveDates.forEach(dateStr => {
-                const dayOfWeek = new Date(dateStr).getDay();
-                if (dayOfWeek !== 0 && dayOfWeek !== 6 && !HOLIDAYS[dateStr]) {
-                    missedClasses += CLASSES_PER_DAY[dayOfWeek];
-                    workingLeaveDays++;
-                }
-            });
-
-            if (selectedLeaveDates.size === 0) {
-                allDomElements.simulationResult.innerHTML = `<p><em>Click on calendar dates to plan a leave.</em></p>`;
-                return;
-            }
-
-            const newHeld = held + missedClasses;
-            const newPercentage = (newHeld === 0) ? 0 : (attended / newHeld) * 100;
-            const oldPercentage = (held === 0) ? 100 : (attended / held) * 100;
-            const statusClass = newPercentage >= REQUIRED_ATTENDANCE_PERCENT ? 'safe' : 'warning';
+        // Determine status based on percentage and calculate buffer.
+        if (percentage >= REQUIRED_ATTENDANCE_PERCENT || (currentHeld === 0 && currentAttended === 0)) {
+            // SAFE Status or no data entered yet.
+            // Calculate how many more classes can be missed to *still* be >= 75%.
+            // Formula: Let C_h be classes held, C_a be attended. We want (C_a / (C_h + M)) >= 0.75
+            // C_a >= 0.75 * (C_h + M) => C_a / 0.75 >= C_h + M => M <= C_a / 0.75 - C_h
+            // So, missable_classes = floor(attended / 0.75 - held).
+            const missableClasses = (currentHeld === 0) ? "∞" : Math.max(0, Math.floor(currentAttended / (REQUIRED_ATTENDANCE_PERCENT / 100) - currentHeld));
             
-            allDomElements.simulationResult.innerHTML = `
-                <div class="sim-row">
-                    <span class="sim-label">Working Leave Days</span>
-                    <span class="sim-value">${workingLeaveDays}</span>
+            // Convert missable classes to equivalent days of leave. Handle edge cases.
+            const practicalDaysStr = (currentHeld === 0 || missableClasses === "∞" || avgClassesPerWorkingDay === 0) 
+                                    ? "N/A" 
+                                    : (missableClasses / avgClassesPerWorkingDay).toFixed(1);
+
+            content = `
+                <div class="analysis-item" style="color:var(--safe-color); font-weight:bold;">STATUS: SAFE</div>
+                <div class="analysis-item"><strong>Attendance Buffer:</strong> You can afford to miss <strong>${missableClasses}</strong> more classes before dropping below 75%.</div>
+                <div class="analysis-item"><strong>In Practical Terms:</strong> This is roughly equivalent to <strong>${practicalDaysStr}</strong> full days of leave.</div>
+                <div class="insight"><strong>Tip:</strong> You have a healthy buffer. Use it wisely for emergencies or important events. Don't let your attendance drift down without reason.</div>
+            `;
+        } 
+        else { // WARNING Status
+            // Calculate how many classes MUST be attended in the future to reach 75%.
+            // Formula: We need (attended) / (held + classes_to_attend) = 0.75
+            // attended = 0.75 * (held + classes_to_attend)
+            // classes_to_attend = (attended / 0.75) - held
+            // Using: calculate target classes for 75% threshold for current 'held': Target_Held_Attended = 0.75 * held.
+            // If attended < Target_Held_Attended, you need to make up: classesNeededToReach75 = ceil(Target_Held_Attended - attended).
+            const targetAttendedFor75PercentOfHeld = REQUIRED_ATTENDANCE_PERCENT / 100 * currentHeld;
+            const classesNeededToReach75 = Math.max(0, Math.ceil(targetAttendedFor75PercentOfHeld - currentAttended)); 
+            
+            // Calculate how many more classes can be missed (buffer).
+            const missableClasses = Math.max(0, Math.floor(currentAttended / (REQUIRED_ATTENDANCE_PERCENT / 100) - currentHeld));
+            
+            // Convert missable classes to equivalent days of leave.
+            const practicalDaysStr = (currentHeld === 0 || missableClasses === "∞" || avgClassesPerWorkingDay === 0) 
+                                    ? "N/A" 
+                                    : (missableClasses / avgClassesPerWorkingDay).toFixed(1);
+
+            content = `
+                <div class="analysis-item" style="color:var(--warning-color); font-weight:bold;">STATUS: WARNING</div>
+                <div class="analysis-item"><strong>Classes to Recover:</strong> You must attend the next <strong>${classesNeededToReach75}</strong> classes without absence to reach 75%.</div>
+                <div class="analysis-item"><strong>Attendance Buffer:</strong> You can afford to miss <strong>${missableClasses}</strong> more classes before dropping to 75%.</div>
+                <div class="analysis-item"><strong>In Practical Terms:</strong> This is roughly equivalent to <strong>${practicalDaysStr}</strong> full days of leave.</div>
+                <div class="insight"><strong>Tip:</strong> Prioritize attending every class. Each full day of attendance (~${avgClassesPerWorkingDay > 0 ? avgClassesPerWorkingDay.toFixed(1) : 'N/A'} classes) will significantly help close this gap.</div>
+            `;
+        }
+        allDomElements.analysisContent.innerHTML = content;
+        console.log("updateAnalysis: Analysis content updated.");
+    }
+
+    /**
+     * Updates the "Attendance Summary" card.
+     * Provides a concise summary including current status, recovery time, and total allowances.
+     * @param {number} currentPercentage Current overall attendance percentage.
+     * @param {number} currentHeld Total classes held according to input.
+     * @param {number} currentAttended Total classes attended according to input.
+     */
+    function updateSummary(currentPercentage, currentHeld, currentAttended) {
+        console.log(`updateSummary: Called with percentage: ${currentPercentage.toFixed(1)}%, held: ${currentHeld}, attended: ${currentAttended}`);
+        let summaryContent = '';
+        const avgClassesPerWorkingDay = getAvgClassesPerWorkingDay();
+
+        // --- Calculate Days to Reach 75% ---
+        let classesNeededToReach75 = 0;
+        let estimatedDaysToRecover = 'N/A'; // Default value if calculation isn't possible.
+        
+        // Only calculate recovery details if current attendance is below threshold and input data exists.
+        if (currentHeld > 0 && currentPercentage < REQUIRED_ATTENDANCE_PERCENT) {
+            const targetAttendedFor75PercentOfHeld = REQUIRED_ATTENDANCE_PERCENT / 100 * currentHeld;
+            classesNeededToReach75 = Math.max(0, Math.ceil(targetAttendedFor75PercentOfHeld - currentAttended));
+            
+            // Estimate days if avg classes per day is available.
+            if (avgClassesPerWorkingDay > 0) { 
+                estimatedDaysToRecover = (classesNeededToReach75 / avgClassesPerWorkingDay).toFixed(1);
+            } else {
+                estimatedDaysToRecover = 'Cannot calculate (no working days)';
+            }
+        } else if (currentHeld === 0 && currentAttended === 0) {
+            // If no data yet, recovery time is not applicable, just show placeholder.
+            classesNeededToReach75 = 0; 
+        }
+
+        // --- Calculate Maximum Allowed Leave Days ---
+        // Minimum classes required to maintain 75% attendance throughout the *entire* academic period.
+        // targetMinClasses = 0.75 * totalClassesInAcademicPeriod
+        const targetMinClassesForPeriod = Math.ceil(REQUIRED_ATTENDANCE_PERCENT / 100 * totalClassesInAcademicPeriod);
+        
+        // Maximum classes that can be missed during the entire period while staying at 75%.
+        // maxMissableClasses = totalClassesInAcademicPeriod - targetMinClasses
+        const maxMissableClassesInPeriod = totalClassesInAcademicPeriod - targetMinClassesForPeriod;
+        
+        let maxLeaveDaysAllowance = 'N/A'; // Default value.
+        if (avgClassesPerWorkingDay > 0) { // Ensure we don't divide by zero.
+            // Convert max missable classes into an approximate number of days.
+            maxLeaveDaysAllowance = (maxMissableClassesInPeriod / avgClassesPerWorkingDay).toFixed(1);
+        } else {
+            maxLeaveDaysAllowance = 'Cannot calculate (no working days)';
+        }
+        
+        // Populate the summary content with the calculated metrics.
+        summaryContent += `
+            <div class="analysis-item">
+                <strong>Current Status:</strong> ${currentPercentage.toFixed(1)}% (${currentAttended}/${currentHeld} classes)
+            </div>
+        `;
+
+        if (currentHeld > 0) { // Only show recovery details if input data is present.
+             summaryContent += `
+                <div class="analysis-item">
+                    <strong>Days to Reach 75%:</strong> ${classesNeededToReach75} classes needed (~ ${estimatedDaysToRecover} days if attending all classes)
                 </div>
-                <div class="sim-row">
-                    <span class="sim-label">Classes Missed</span>
-                    <span class="sim-value">${missedClasses}</span>
-                </div>
-                <div class="sim-row">
-                    <span class="sim-label">Attendance Before</span>
-                    <span class="sim-value">${oldPercentage.toFixed(2)}%</span>
-                </div>
-                <div class="sim-row">
-                    <span class="sim-label">Attendance After</span>
-                    <span class="sim-value ${statusClass}" style="font-weight:bold;">${newPercentage.toFixed(2)}%</span>
+            `;
+        } else { // If no data, prompt the user to enter it.
+             summaryContent += `
+                <div class="analysis-item">
+                    <strong>Days to Reach 75%:</strong> Enter class data to see recovery time.
                 </div>
             `;
         }
-    </script>
+
+        // Add summary of the entire academic period.
+        summaryContent += `
+            <div class="analysis-item">
+                <strong>Total Classes in Period:</strong> ${totalClassesInAcademicPeriod}
+            </div>
+            <div class="analysis-item">
+                <strong>Max Leave Days Allowed:</strong> ~${maxLeaveDaysAllowance} days (based on 75% attendance)
+            </div>
+            <div class="insight">
+                <strong>Insight:</strong> Plan your leaves considering your overall allowance and recovery needs.
+            </div>
+        `;
+        
+        allDomElements.summaryContent.innerHTML = summaryContent;
+        console.log("updateSummary: Summary content updated.");
+    }
+
+    /**
+     * Updates the "Simulated Subject Breakdown" card.
+     * Currently a placeholder; could be expanded to show breakdown per subject if data were available.
+     * @param {number} percentage Overall attendance percentage.
+     */
+    function updateSubjectBreakdown(percentage) {
+        console.log("updateSubjectBreakdown: Placeholder function called.");
+        // This function would ideally populate subject-specific attendance if that data were tracked.
+        // For now, it serves as a hook for future expansion or simply to show it's considered.
+        if (percentage > 0) {
+             allDomElements.subjectBreakdown.innerHTML = `<p><em>Subject breakdown based on overall attendance: ${percentage.toFixed(1)}%.</em></p>`;
+        } else {
+             allDomElements.subjectBreakdown.innerHTML = `<p><em>Enter class data to see subject breakdown.</em></p>`;
+        }
+    }
+
+    /**
+     * Populates the timetable card with class schedules fetched from SUBJECTS_TIMETABLE_INFO.
+     */
+    function populateTimetable() {
+        console.log("populateTimetable: Populating timetable data.");
+        allDomElements.timetableBody.innerHTML = ''; // Clear any existing rows from previous updates (though it's static here).
+        const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"]; // Relevant days for classes.
+
+        // Iterate through each day and add its scheduled classes to the table.
+        daysOfWeek.forEach(day => {
+            // Filter subjects that are scheduled on the current day.
+            const classesForDay = SUBJECTS_TIMETABLE_INFO.filter(item => item.days.includes(day));
+            
+            if (classesForDay.length === 0) { // If no classes are scheduled for this day.
+                allDomElements.timetableBody.innerHTML += `
+                    <tr>
+                        <td class="day-header">${day}</td>
+                        <td colspan="2">No classes scheduled</td>
+                    </tr>
+                `;
+            } else { 
+                // If classes exist, add them to the table. Display the day header only for the first class of the day.
+                classesForDay.forEach((classInfo, index) => {
+                    // Find the correct time for this subject on this specific day.
+                    const dayIndex = classInfo.days.indexOf(day); 
+                    const time = classInfo.times[dayIndex];
+                    allDomElements.timetableBody.innerHTML += `
+                        <tr>
+                            <td class="day-header">${index === 0 ? day : ''}</td> <!-- Display day name only for the first class -->
+                            <td class="subject-time">${time}</td>
+                            <td>${classInfo.subject}</td>
+                        </tr>
+                    `;
+                });
+            }
+        });
+        console.log("populateTimetable: Timetable populated.");
+    }
+
+    /**
+     * Renders the calendar grid for the month specified by `calendarNavDate`.
+     * Includes styling for weekends, holidays, and selected leave dates.
+     * Also handles date selection and checks against academic period boundaries.
+     */
+    function renderCalendar() {
+        console.log("renderCalendar: Rendering calendar for", calendarNavDate.toLocaleDateString());
+        allDomElements.calendarGrid.innerHTML = ''; // Clear previous month's calendar grid.
+        const year = calendarNavDate.getFullYear();
+        const month = calendarNavDate.getMonth();
+        
+        // Update the month and year display at the top of the calendar.
+        allDomElements.monthYearEl.textContent = `${calendarNavDate.toLocaleString('default', { month: 'long' })} ${year}`;
+        
+        const firstDayOfMonth = new Date(year, month, 1).getDay(); // Day of the week for the 1st of the month (0=Sun, 6=Sat).
+        const daysInMonth = new Date(year, month + 1, 0).getDate(); // Number of days in the current month.
+
+        // Add empty cells to the calendar grid for days before the 1st of the month, 
+        // so the grid aligns correctly with the week days (S, M, T, W, T, F, S).
+        for (let i = 0; i < firstDayOfMonth; i++) {
+            allDomElements.calendarGrid.insertAdjacentHTML('beforeend', `<div class="calendar-day other-month"></div>`);
+        }
+        
+        // Iterate through each day of the month to create its cell.
+        for (let day = 1; day <= daysInMonth; day++) {
+            // Format date string for easy lookup and use in event data (e.g., '2025-08-01').
+            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const currentDateObj = new Date(year, month, day); // Create a Date object for the current day.
+            currentDateObj.setHours(0,0,0,0); // Normalize to start of the day.
+            const dayOfWeek = currentDateObj.getDay(); // Get day of the week for styling (0=Sun, 6=Sat).
+            
+            const dayEl = document.createElement('div');
+            dayEl.className = 'calendar-day';
+            dayEl.textContent = day;
+            dayEl.dataset.date = dateStr; // Store the date string for event handling.
+
+            // Apply specific styling for weekends and holidays.
+            if (dayOfWeek === 0 || dayOfWeek === 6) { // Weekend days
+                dayEl.classList.add('weekend');
+            }
+            if (HOLIDAYS[dateStr]) { // If the current date is a defined holiday.
+                dayEl.classList.add('holiday');
+                dayEl.title = HOLIDAYS[dateStr]; // Add a tooltip to show the holiday name.
+            }
+            // Apply styling if the date is already selected as a leave day.
+            if (selectedLeaveDates.has(dateStr)) {
+                dayEl.classList.add('selected-leave');
+            }
+            
+            // Disable and visually indicate dates that fall outside the defined academic period.
+            if (currentDateObj < ACADEMIC_START_DATE_OBJ || currentDateObj > ACADEMIC_END_DATE_OBJ) {
+                dayEl.classList.add('other-month'); // Use 'other-month' class for styling (grayed out, non-interactive).
+                dayEl.style.cursor = 'default'; // Change cursor to indicate non-interactive.
+            } else {
+                // Add click event listener ONLY for dates within the academic period.
+                dayEl.addEventListener('click', handleDateClick);
+            }
+            allDomElements.calendarGrid.appendChild(dayEl); // Append the created day element to the grid.
+        }
+        console.log("renderCalendar: Calendar rendered for month.");
+    }
+
+    /**
+     * Handles click events on calendar days. Toggles selection of leave dates 
+     * and updates the simulation accordingly.
+     * @param {MouseEvent} event The click event object.
+     */
+    function handleDateClick(event) {
+        // Only allow leave selection if the dashboard has been generated.
+        if (allDomElements.dashboard.style.display !== 'grid') {
+             alert('Please generate the dashboard first by entering class details!');
+             return;
+        }
+
+        const dateStr = event.target.dataset.date;
+        if (!dateStr) return; // Exit if the clicked element doesn't have a date dataset (shouldn't happen with valid DOM structure).
+
+        const leaveDateObj = new Date(dateStr);
+        leaveDateObj.setHours(0,0,0,0); // Normalize the date object for comparisons.
+
+        // Double-check that the selected date is within the academic period. 
+        // This is a safeguard; it should already be handled by `renderCalendar` by not attaching listeners to invalid dates.
+        if (leaveDateObj < ACADEMIC_START_DATE_OBJ || leaveDateObj > ACADEMIC_END_DATE_OBJ) {
+            return; // Do not process if outside the academic period.
+        }
+
+        // Toggle the selection of the leave date.
+        if (selectedLeaveDates.has(dateStr)) {
+            // If the date is already selected, remove it from the set and styling.
+            selectedLeaveDates.delete(dateStr); 
+            event.target.classList.remove('selected-leave'); 
+        } else {
+            // If the date is not selected, add it to the set and apply styling.
+            selectedLeaveDates.add(dateStr); 
+            event.target.classList.add('selected-leave'); 
+        }
+        // After changing the selection, re-run the simulation to update the projected attendance.
+        updateSimulation();
+    }
+
+    /**
+     * Navigates the calendar to the previous or next month.
+     * @param {number} offset -1 for previous month, 1 for next month.
+     */
+    function changeMonth(offset) {
+        console.log("changeMonth: Moving calendar by", offset);
+        // Update the calendarNavDate by adding the offset to the current month.
+        calendarNavDate.setMonth(calendarNavDate.getMonth() + offset);
+        // Re-render the calendar grid to display the new month.
+        renderCalendar();
+    }
+
+    /**
+     * Updates the "Leave & Holiday Planner" simulation result area.
+     * Calculates the impact of selected future leave days on the attendance percentage.
+     */
+    function updateSimulation() {
+        console.log("updateSimulation: Starting simulation update.");
+        // If the dashboard is not visible yet, show a message prompting the user to generate it first.
+        if (allDomElements.dashboard.style.display !== 'grid') {
+            allDomElements.simulationResult.innerHTML = `<p><em>Select dates on the calendar to plan your leave and see the impact.</em></p>`;
+            console.log("updateSimulation: Dashboard not active, showing initial message.");
+            return;
+        }
+
+        let classesMissedThisPeriod = 0;
+        let workingLeaveDaysCount = 0;
+        
+        // The simulation projects the impact of leaves taken *after* the input data date ("as of" date).
+        // If `generateDashboard` hasn't been called yet (held=0, attended=0), use ACADEMIC_START_DATE_OBJ as simulation start.
+        const simulationStartDate = inputDataDate || ACADEMIC_START_DATE_OBJ; 
+        console.log(`updateSimulation: Simulating leaves after ${formatDate(simulationStartDate)}`);
+
+        // Iterate through all currently selected leave dates to calculate the impact.
+        selectedLeaveDates.forEach(dateStr => {
+            const leaveDate = new Date(dateStr);
+            leaveDate.setHours(0,0,0,0); // Normalize the leave date.
+
+            // Only consider leave dates that are strictly AFTER the input data reference date.
+            // This prevents simulation from double-counting classes already implicitly included in 'held' and 'attended'.
+            if (leaveDate > simulationStartDate) {
+                const dayOfWeek = leaveDate.getDay();
+                // Count classes missed only for working days (Mon-Fri) that are not holidays.
+                if (dayOfWeek !== 0 && dayOfWeek !== 6 && !HOLIDAYS[dateStr]) {
+                    classesMissedThisPeriod += CLASSES_PER_DAY[dayOfWeek] || 0; // Add classes missed for that specific day.
+                    workingLeaveDaysCount++; // Increment count of actual working days taken as leave.
+                }
+            }
+        });
+
+        // Display appropriate messages in the simulation result area based on findings.
+        if (workingLeaveDaysCount === 0) { // If no valid future leave days were selected or processed.
+             if (selectedLeaveDates.size > 0) { // If dates were selected, but they were in the past/today relative to input data.
+                allDomElements.simulationResult.innerHTML = `<p><em>Selected leave dates are in the past or today relative to your input data. Select future dates to simulate.</em></p>`;
+                console.log("updateSimulation: No future valid leave days selected. Showing past/today message.");
+             } else { // If no leave dates were selected at all.
+                allDomElements.simulationResult.innerHTML = `<p><em>Click on calendar dates to plan a leave and see its impact.</em></p>`;
+                console.log("updateSimulation: No leave dates selected. Showing planning message.");
+             }
+             return; // Exit if there's no simulation to display.
+        }
+
+        // Calculate new attendance figures after accounting for planned future missed classes.
+        const newHeldTotal = held + classesMissedThisPeriod; // Projected total classes held.
+        const newAttendedTotal = attended; // Attended classes remain unchanged by the simulation.
+        
+        let newPercentage = 0;
+        if (newHeldTotal > 0) {
+            newPercentage = (newAttendedTotal / newHeldTotal) * 100;
+        } else if (newAttendedTotal === 0) { // If 0 held and 0 attended, percentage is 0.
+            newPercentage = 0; 
+        }
+
+        // Get the attendance percentage before applying the simulated leaves.
+        const oldPercentage = (held === 0) ? 0 : (attended / held) * 100;
+        
+        // Determine the status class ('safe' or 'warning') based on the projected attendance percentage.
+        const statusClass = newPercentage >= REQUIRED_ATTENDANCE_PERCENT ? 'safe' : 'warning';
+        
+        // Update the simulation result HTML with the calculated projections.
+        allDomElements.simulationResult.innerHTML = `
+            <div class="sim-row">
+                <span class="sim-label">Working Leave Days Planned</span>
+                <span class="sim-value">${workingLeaveDaysCount}</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">Total Classes Missed (Future)</span>
+                <span class="sim-value">${classesMissedThisPeriod}</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">Attendance Before Simulation</span>
+                <span class="sim-value">${oldPercentage.toFixed(2)}%</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">Projected Attendance</span>
+                <span class="sim-value ${statusClass}" style="font-weight:bold;">${newPercentage.toFixed(2)}%</span>
+            </div>
+        `;
+        console.log(`updateSimulation: Simulation result updated. Projected: ${newPercentage.toFixed(2)}%`);
+    }
+    
+    // Note: updateSubjectBreakdown is included in updateAllComponents but its logic is not implemented in this snippet.
+    // If specific breakdown per subject is needed, this function would need to be expanded.
+    // For now, it's just mapped for completeness.
+    function updateSubjectBreakdown(percentage) {
+        console.log("updateSubjectBreakdown: Placeholder function called.");
+        // This function would ideally populate subject-specific attendance if that data were tracked.
+        // For now, it serves as a hook for future expansion or simply to show it's considered.
+        if (percentage > 0) {
+             allDomElements.subjectBreakdown.innerHTML = `<p><em>Subject breakdown based on overall attendance: ${percentage.toFixed(1)}%.</em></p>`;
+        } else {
+             allDomElements.subjectBreakdown.innerHTML = `<p><em>Enter class data to see subject breakdown.</em></p>`;
+        }
+    }
+
+</script>
 </body>
 </html>
